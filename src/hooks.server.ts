@@ -1,31 +1,34 @@
+import type { Handle } from '@sveltejs/kit'
 import { lucia } from "$lib/server/auth";
-import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
-    // Obtenemos la cookie con el ID de la sesion
+
+	// Obtenemos el ID de la sesion guardado en la cookie
 	const sessionId = event.cookies.get(lucia.sessionCookieName);
 
-    // Si no hay cookie
+	// Si no hay ID session guardada en cookie, retornamos
 	if (!sessionId) {
 		event.locals.user = null;
 		event.locals.session = null;
+
 		return resolve(event);
 	}
 
-    // Validamos si existe una sesion con el ID guardado en la cookie
+	// Validamos el ID session guardado en la cookie
 	const { session, user } = await lucia.validateSession(sessionId);
 
-    // Si existe una sesion pero fress es true, se extendio la fecha de expiracion de la sesion
-    // entonces tenemos que renovar la cookie
+	// Si existe una sesion con ese ID pero fress es true significa que se extendio la sesion y por lo tanto tenemos que renovar la cookie
 	if (session && session.fresh) {
 		const sessionCookie = lucia.createSessionCookie(session.id);
+		// sveltekit types deviates from the de-facto standard
+		// you can use 'as any' too
 		event.cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: ".",
 			...sessionCookie.attributes
 		});
 	}
 
-    // Si no se valida la sesion con el ID de la cookie, se resetea la cookie
+	// Si el ID guardado en la cookie no es valido, reseteamos la cookie
 	if (!session) {
 		const sessionCookie = lucia.createBlankSessionCookie();
 		event.cookies.set(sessionCookie.name, sessionCookie.value, {
@@ -34,9 +37,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		});
 	}
 
-    // Se guardan los valores del usuario y la sesión que estarán disponibles en:
+	// Gurdamos los valores de la sesion, del usuario y retornamos
 	event.locals.user = user;
 	event.locals.session = session;
-
 	return resolve(event);
-};
+}

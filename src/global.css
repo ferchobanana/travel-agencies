@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Geist', sans-serif;
+}
+
+:root {
+    --background-dark-color: #111827;
+    --background-light-color: #F3F4F6;
+    --primary-color: #4B9CFF;
+    --font-light-color: #AEB5C5;
+    --font-info-color: #4d4e53;
+    --border-light-color: #dadada;
+}
+
+.card {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid var(--border-light-color);
+    border-radius: 8px;
+}
+
+.base-input {
+    min-width: 30px;
+    background: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: 1px solid var(--border-light-color);
+    border-radius: 6px;
+    outline: none;
+}
+
+.base-button {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.base-button:disabled {
+    background-color: #799ece;
+    cursor: auto;
+}
+
+.base-label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.base-label-description {
+    font-size: 14px;
+    color: var(--font-info-color);
+}
