@@ -84,7 +84,7 @@
     }
 
     input:focus {
-        outline: 1px solid #4b9cff;
+        outline: 1px solid var(--primary-color);
     }
 
     .forgot-password {
@@ -100,7 +100,7 @@
         font-size: 14px;
         font-weight: 600;
         color: #ffffff;
-        background-color: #4b9cff;
+        background-color: var(--primary-color);
         border: none;
         border-radius: 6px;
         cursor: pointer;

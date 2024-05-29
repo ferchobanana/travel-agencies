@@ -30,7 +30,7 @@
         </a>
 
         <a href="/reservas" class="option">
-            <p>reservas</p>
+            <p>Reservas</p>
         </a>
 
         <a href="/revendedores" class="option">
