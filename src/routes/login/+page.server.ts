@@ -43,8 +43,12 @@ export const actions = {
         // Si el array que se obtiene no contiene ningun elemento, es decir ningun usuario
         if (!existingUser) {
             return fail(400, {
-                message: "Correo o contraseña incorrectos"
+                message: "Correo o contraseña incorrectos."
             })
+        }
+
+        if(existingUser.type != "admin") {
+            return fail(400, { message: "Correo o contraseña incorrectos." })
         }
 
         // Validamos la contraseña con la funcion verify de argon2
@@ -58,7 +62,7 @@ export const actions = {
         // Si la contraseña no es válida
         if (!validPassword) {
             return fail(400, {
-                message: "Correo o contraseña incorrectos"
+                message: "Correo o contraseña incorrectos."
             });
         }
 

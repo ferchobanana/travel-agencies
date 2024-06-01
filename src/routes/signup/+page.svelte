@@ -1,7 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms"
     import type { ActionData } from "./$types"
-    // import Logo from "$lib/imgs/logo.png"
+    import LoadingPage from "$lib/components/LoadingPage.svelte";
 
     export let form: ActionData
 
@@ -15,9 +15,7 @@
 <div class="signup">
 
     {#if loading}
-        <div class="page-loader">
-            <p>cargando...</p>
-        </div>
+        <LoadingPage></LoadingPage>
     {/if}
         
     <form method="post" class="signup-form" use:enhance on:submit={() => { loading = true }}>
@@ -52,7 +50,7 @@
         display: flex;
         flex-direction: column;
         color: #fff;
-        background-color: var(--dark-background-color);
+        background-color: var(--background-dark-color);
         border-radius: 15px;
         padding: 60px 40px;
     }

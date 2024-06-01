@@ -37,10 +37,6 @@
             <p>Revendedores</p>
         </a>
 
-        <a href="/productos-internos" class="option">
-            <p>Productos internos</p>
-        </a>
-
         <a href="/productos-revendedores" class="option">
             <p>Productos revendedores</p>
         </a>

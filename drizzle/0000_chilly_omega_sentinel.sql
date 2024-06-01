@@ -1,3 +1,23 @@
+CREATE TABLE IF NOT EXISTS "productos" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"nombre" text NOT NULL,
+	"descripcion" text NOT NULL,
+	"precio_adulto" double precision NOT NULL,
+	"precio_nino" double precision NOT NULL,
+	"precio_infante" double precision NOT NULL,
+	"created_at" timestamp DEFAULT now()
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "reservas" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"nombre" text NOT NULL,
+	"celular" text NOT NULL,
+	"email" text,
+	"productos" jsonb NOT NULL,
+	"total" integer,
+	"created_at" timestamp DEFAULT now()
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "sessions" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
@@ -9,6 +29,8 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"email" text,
 	"user_name" varchar(50),
 	"password" text,
+	"type" text,
+	"data" jsonb,
 	"url_profile_picture" text,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "users_email_unique" UNIQUE("email")

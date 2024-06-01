@@ -19,6 +19,7 @@
     background-color: #fff;
     border: 1px solid var(--border-light-color);
     border-radius: 8px;
+    padding: 20px;
 }
 
 .base-input {
@@ -36,20 +37,23 @@
     color: #fff;
     background-color: var(--primary-color);
     border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 15px 15px;
     border: none;
     cursor: pointer;
 }
 
 .base-button:disabled {
-    background-color: #799ece;
+    background-color: #5a7e79;
     cursor: auto;
 }
 
 .base-label {
     font-size: 18px;
     font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .base-label-description {
@@ -59,4 +63,5 @@
 
 .base-page-title {
     font-size: 55px;
+    margin-bottom: 30px;
 }
