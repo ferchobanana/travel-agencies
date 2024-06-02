@@ -1,7 +1,10 @@
 <script lang="ts">
     import Icon from "@iconify/svelte"
+    import { formatDBDate } from "$lib/formatDate";
 
     export let data
+
+    
 
 </script>
 
@@ -17,20 +20,27 @@
     </div>
 
     <div class="vendedores">
-        <div class="vendedor card">
-            <p class="id">123456</p>
-            <p class="nombre">Fernando Jiménez</p>
-            <p class="fecha-registro">31/05/24</p>
+        {#each data.vendedores as v (v.id)}
+            <div class="vendedor card">
+                <p class="id">{ v.email }</p>
+                <p class="nombre">{ v.user_data.nombre }</p>
+                <p class="fecha-registro">{ formatDBDate(v.creado) }</p>
 
-            <div class="botones">
-                <button class="base-button">Editar</button>
+                <div class="botones">
+                    <a href={`/editar-vendedor?id=${v.id}`} class="base-button">Editar</a>
+                </div>
             </div>
-        </div>
+        {/each}
     </div>
 
 </div>
 
 <style>
+    .vendedores {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
     .vendedor {
         display: flex;
         justify-content: space-between;

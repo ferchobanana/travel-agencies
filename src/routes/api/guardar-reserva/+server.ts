@@ -1,5 +1,4 @@
 import { error, json, redirect } from '@sveltejs/kit'
-import { goto } from '$app/navigation'
 import { db } from "$lib/server/db/db"
 import { reservasTable } from '$lib/server/db/schema.js'
 
@@ -27,9 +26,27 @@ export async function POST({ request, locals }) {
         return json({ message: "Tienes que agregar por lo menos un producto", status: 400 })
     }
 
+    function validate_date(fecha: string) {
+        const current_date = new Date;
+        current_date.setHours(0, 0, 0, 0);
+
+        const [year, month, day] = fecha.split('-')
+        const input_date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
+
+        if (input_date.getTime() == current_date.getTime()) return true
+
+        if (input_date.getTime() < current_date.getTime()) return false 
+        
+        return true
+    }
+
     for(let i = 0; i < productos.length; i++) {
         if (productos[i].fecha.length < 8) {
             return json({ message: "Los productos tienen que tener una fecha válida", status: 400 })
+        }
+
+        if(!validate_date(productos[i].fecha)) {
+            return json({ message: "La fecha de un producto no puede ser anterior a la actual.", status: 400 })
         }
 
         if(productos[i].adultos < 1) {
